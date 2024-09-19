@@ -16,10 +16,10 @@ RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 
 # Snake attributes
-block_size = 20
+block_size = 10
 initial_snake_speed = 5
-max_snake_speed = 20
-snake_speed_increment = 1
+max_snake_speed = 100
+snake_speed_increment = 5
 
 # Font
 font = pygame.font.SysFont(None, 30)
