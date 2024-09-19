@@ -24,6 +24,17 @@ snake_speed_increment = 5
 # Font
 font = pygame.font.SysFont(None, 30)
 
+# List of background colors for different level ranges
+level_colors = [
+    (0, 0, 0),        # Level 1-5
+    (46, 41, 0),     # Level 6-10
+    (0, 74, 0),     # Level 11-15
+    (0, 0, 90),     # Level 16-20
+    (66, 0, 66),    # Level 21-25
+    (110, 53, 24),   # Level 26-30
+    (20, 46, 71)   # Level 31-35
+]
+
 # Function to draw text on screen
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
@@ -77,8 +88,9 @@ def gameLoop():
     # Initial position of the food
     food_x = round(random.randrange(0, width - block_size) / block_size) * block_size
     food_y = round(random.randrange(0, height - block_size) / block_size) * block_size
-
-    snake_speed = initial_snake_speed  # Set initial snake speed
+    
+    # Set initial snake speed
+    snake_speed = initial_snake_speed  
 
     clock = pygame.time.Clock()
 
@@ -122,7 +134,12 @@ def gameLoop():
             game_close = True
         x += x_change
         y += y_change
-        screen.fill(BLACK)  # Set background color to black
+
+        # Determine the background color based on the level
+        color_index = (level - 1) // 5  # Change color every 5 levels
+        current_color = level_colors[color_index % len(level_colors)]
+        screen.fill(current_color)  # Set background color based on level
+        
         pygame.draw.rect(screen, RED, [food_x, food_y, block_size, block_size])
         snake_head = []
         snake_head.append(x)
