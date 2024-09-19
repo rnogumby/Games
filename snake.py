@@ -5,7 +5,7 @@ import random
 pygame.init()
 
 # Set up the display
-width, height = 800, 600
+width, height = 1280, 720
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Snake Game")
 
@@ -35,6 +35,25 @@ def draw_text(text, font, color, surface, x, y):
 def draw_snake(block_size, snake_list):
     for x in snake_list:
         pygame.draw.rect(screen, GREEN, [x[0], x[1], block_size, block_size])
+
+# Pause function
+def pause_game():
+    paused = True
+    while paused:
+        screen.fill(BLACK)
+        draw_text("Paused. Press P to resume or Q to quit", font, WHITE, screen, width/4, height/3)
+        pygame.display.update()
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    paused = False  # Resume the game
+                if event.key == pygame.K_q:
+                    pygame.quit()
+                    quit()
 
 # Function to display the game
 def gameLoop():
@@ -66,7 +85,7 @@ def gameLoop():
     while not game_over:
 
         while game_close == True:
-            screen.fill(WHITE)
+            screen.fill(BLACK)
             draw_text("You lost! Press Q to quit or C to play again", font, RED, screen, width/4, height/3)
             pygame.display.update()
 
@@ -94,6 +113,10 @@ def gameLoop():
                 elif event.key == pygame.K_DOWN:
                     y_change = block_size
                     x_change = 0
+                elif event.key == pygame.K_p:
+                    pause_game()  # Call the pause function
+                elif event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+                    game_over = True  # Quit the game when Q or ESC is pressed
 
         if x >= width or x < 0 or y >= height or y < 0:
             game_close = True
