@@ -5,7 +5,7 @@ import random
 pygame.init()
 
 # Set up the display
-width, height = 1280, 720
+width, height = 1600, 900
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Snake Game")
 
