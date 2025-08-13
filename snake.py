@@ -4,8 +4,11 @@ import random
 # Initialize pygame
 pygame.init()
 
-# Set up the display
-width, height = 1600, 900
+""" Set up the display to use the current screen size, rounded to block_size grid """
+info = pygame.display.Info()
+block_size = 10
+width = info.current_w - (info.current_w % block_size)
+height = info.current_h - (info.current_h % block_size)
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Snake Game")
 
